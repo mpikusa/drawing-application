@@ -4,7 +4,7 @@ import ch.pikusa.drawing.Canvas
 import ch.pikusa.drawing.DrawingException
 import ch.pikusa.drawing.Point
 
-fun Canvas?.verifyCanvasExists() {
+fun Canvas?.verifyCanvasIsCreated() {
     if(this == null) {
         throw DrawingException("Operation requires canvas to exist, please execute Create Canvas command first.")
     }

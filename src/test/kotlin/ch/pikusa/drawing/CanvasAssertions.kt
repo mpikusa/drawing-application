@@ -12,6 +12,6 @@ fun haveFilled(numberOfFilledFields: Int, fillCharacter: Char = 'x') = Matcher<C
     )
 }
 
-fun createApplicationState(width: Int, height: Int = width): ApplicationState {
-    return ApplicationState(canvas = Canvas(width, height))
+fun createApplicationState(canvasWidth: Int, canvasHeight: Int = canvasWidth): ApplicationState {
+    return ApplicationState(canvas = Canvas(canvasWidth, canvasHeight))
 }

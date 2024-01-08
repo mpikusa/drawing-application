@@ -9,7 +9,7 @@ class DrawRectangle(val topLeft: Point, val bottomRight: Point, val applicationS
     DrawingCommand {
 
     init {
-        applicationState.canvas.verifyCanvasExists()
+        applicationState.canvas.verifyCanvasIsCreated()
         applicationState.canvas?.verifyPointBelongsToCanvas(topLeft)
         applicationState.canvas?.verifyPointBelongsToCanvas(bottomRight)
         verifyPointsAreInOrder(topLeft, bottomRight)

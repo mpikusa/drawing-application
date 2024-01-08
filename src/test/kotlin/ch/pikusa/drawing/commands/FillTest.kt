@@ -9,8 +9,7 @@ import io.kotest.matchers.shouldBe
 
 class FillTest: StringSpec() {
     init {
-
-        "Should throw exception if point to fill is beyond the canvas" {
+        "Should throw exception if starting point is beyond the canvas" {
             shouldThrow<DrawingException> {
                 Fill(Point(5, 5), 'o', createApplicationState(4)).execute()
             }
@@ -62,5 +61,39 @@ class FillTest: StringSpec() {
                 "oxxxx"
             )
         }
+
+        "Should not change canvas if fill color is the same as color of the starting point" {
+            val applicationState = createApplicationState(5)
+            DrawRectangle(Point(2, 2), Point(5, 5), applicationState).execute()
+
+            Fill(Point(2, 2), 'x', applicationState).execute()
+
+            applicationState.canvas!!.render() shouldBe listOf(
+                "     ",
+                " xxxx",
+                " x  x",
+                " x  x",
+                " xxxx",
+            )
+        }
+
+        "Should not fill points that are diagonally connected to the starting point" {
+            val applicationState = createApplicationState(5)
+
+            applicationState.canvas!![Point(2, 2)] = 'x'
+            applicationState.canvas!![Point(3, 3)] = 'x'
+
+            Fill(Point(3, 3), 'o', applicationState).execute()
+
+            applicationState.canvas!!.render() shouldBe listOf(
+                "     ",
+                " x   ",
+                "  o  ",
+                "     ",
+                "     ",
+            )
+        }
+
+
     }
 }

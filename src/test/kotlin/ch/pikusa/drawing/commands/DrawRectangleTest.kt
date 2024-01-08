@@ -38,6 +38,19 @@ class DrawRectangleTest: StringSpec() {
             )
         }
 
+        "Should correctly draw rectangle the same size as the canvas" {
+            val applicationState = createApplicationState(4)
+
+            DrawRectangle(Point(1, 1), Point(4, 4), applicationState).execute()
+
+            applicationState.canvas!!.render() shouldBe listOf(
+                "xxxx",
+                "x  x",
+                "x  x",
+                "xxxx"
+            )
+        }
+
         "Should throw exception if first point is not an upper left corner of the rectangle" {
             val applicationState = createApplicationState(5)
 
@@ -55,6 +68,12 @@ class DrawRectangleTest: StringSpec() {
         "should throw exception if rectangle has height of 1" {
             shouldThrow<DrawingException> {
                 DrawRectangle(Point(2, 2), Point(5, 2), createApplicationState(5)).execute()
+            }
+        }
+
+        "should throw exception if both points are the same" {
+            shouldThrow<DrawingException> {
+                DrawRectangle(Point(2, 2), Point(2, 2), createApplicationState(5)).execute()
             }
         }
 

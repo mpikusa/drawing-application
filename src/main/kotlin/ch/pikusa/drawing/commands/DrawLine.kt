@@ -12,7 +12,7 @@ class DrawLine(val p1: Point, val p2: Point, val applicationState: ApplicationSt
 
     init {
         verifyThatLineIsNotTilted(p1, p2)
-        applicationState.canvas.verifyCanvasExists()
+        applicationState.canvas.verifyCanvasIsCreated()
         applicationState.canvas?.verifyPointBelongsToCanvas(p1)
         applicationState.canvas?.verifyPointBelongsToCanvas(p2)
     }

@@ -18,7 +18,7 @@ Assumptions:
    - I display error message if points aren't in a correct order.
 5. Fill:
    - It is possible to use any character to fill(also empty space).
-   - I fill all contiguous points that are of the same color(character) as the given point.
+   - All contiguous points that are of the same color(character) as the given point are filled.
 
 How to run:
 

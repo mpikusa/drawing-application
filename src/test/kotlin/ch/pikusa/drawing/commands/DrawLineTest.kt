@@ -69,5 +69,17 @@ class DrawLineTest  : StringSpec() {
                 " x   "
             )
         }
+
+        "Should draw one point if twice the same point is given" {
+            val applicationState = createApplicationState(3)
+
+            DrawLine(Point(2, 2), Point(2, 2), applicationState).execute()
+            applicationState.canvas
+
+            applicationState.canvas!!.render() shouldBe listOf(
+                "   ",
+                " x ",
+                "   ")
+        }
     }
 }

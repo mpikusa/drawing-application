@@ -11,24 +11,26 @@ import java.util.*
 class Fill(val startingPoint: Point, val color: Char, val applicationState: ApplicationState) : DrawingCommand {
 
     init {
-        applicationState.canvas.verifyCanvasExists()
+        applicationState.canvas.verifyCanvasIsCreated()
         applicationState.canvas?.verifyPointBelongsToCanvas(startingPoint)
     }
 
     override fun execute() {
         val canvas = applicationState.canvas!!
         val startingPointColor = canvas[startingPoint]
-        val visited = mutableSetOf<Point>()
+
+        if(startingPointColor == color) {
+            return
+        }
+
         val directions = listOf(Pair(0, 1), Pair(0, -1), Pair(1, 0), Pair(-1, 0))
         val queue: Queue<Point> = LinkedList()
         queue.add(startingPoint)
 
         while (queue.isNotEmpty()) {
             val currentPoint = queue.poll()
-            visited.add(currentPoint)
             canvas[currentPoint] = color
             val validNeighbouringPoints = directions.map { currentPoint.shift(it) }
-                .filterNot { visited.contains(it) }
                 .filterNot { canvas.isOutOfBounds(it) }
                 .filter { canvas[it] == startingPointColor }
 
